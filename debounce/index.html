@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Throttle demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+  <body>
+    <p>Throttle</p>
+    <div>実行回数: <span id="output">0</span></div>
+
+    <script>
+      var output = document.getElementById('output');
+
+      var debounceFunc = (function() {
+
+        // 停止させたい時間
+        var interval = 250;
+        var timer;
+
+        return function() {
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            num = parseInt(output.textContent, 10) + 1;
+            output.textContent = num;
+          }, interval);
+        };
+      })();
+
+
+      if (window.addEventListener) {
+        window.addEventListener('resize', debounceFunc, false);
+      } else if (window.attachEvent){
+        window.attachEvent('onresize', debounceFunc);
+      }
+    </script>
+  </body>
+</html>
